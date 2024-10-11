@@ -4,6 +4,7 @@ services:
     image: traefik:v2.9.6
     command:
       --log.level=DEBUG
+      --accesslog=true
       --providers.docker=true
       --providers.docker.watch=true
       --providers.docker.swarmMode=true
