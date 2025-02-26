@@ -21,8 +21,8 @@ services:
       --certificatesresolvers.letsEncrypt.acme.httpChallenge.entryPoint=http
       --certificatesresolvers.letsEncrypt.acme.email=mail@audetv.ru
       --certificatesresolvers.letsEncrypt.acme.storage=/certs/acme.json      
-      --metrics.prometheus=true  # Включаем метрики Prometheus
-      --metrics.prometheus.entryPoint=metrics  # Указываем entryPoint для метрик
+      --metrics.prometheus=true  
+      --metrics.prometheus.entryPoint=metrics  # Включаем метрики Prometheus # Указываем entryPoint для метрик
     ports:
       - target: 80
         published: 80
