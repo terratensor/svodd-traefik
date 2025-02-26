@@ -20,7 +20,9 @@ services:
       --certificatesresolvers.letsEncrypt.acme.httpChallenge=true
       --certificatesresolvers.letsEncrypt.acme.httpChallenge.entryPoint=http
       --certificatesresolvers.letsEncrypt.acme.email=mail@audetv.ru
-      --certificatesresolvers.letsEncrypt.acme.storage=/certs/acme.json
+      --certificatesresolvers.letsEncrypt.acme.storage=/certs/acme.json      
+      --metrics.prometheus=true  # Включаем метрики Prometheus
+      --metrics.prometheus.entryPoint=metrics  # Указываем entryPoint для метрик
     ports:
       - target: 80
         published: 80
@@ -28,6 +30,10 @@ services:
         mode: host
       - target: 443
         published: 443
+        protocol: tcp
+        mode: host
+      - target: 8082  # Порт для метрик Prometheus
+        published: 8082
         protocol: tcp
         mode: host
     networks:
