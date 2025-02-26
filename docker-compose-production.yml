@@ -22,7 +22,8 @@ services:
       --certificatesresolvers.letsEncrypt.acme.email=mail@audetv.ru
       --certificatesresolvers.letsEncrypt.acme.storage=/certs/acme.json      
       --metrics.prometheus=true  
-      --metrics.prometheus.entryPoint=metrics  # Включаем метрики Prometheus # Указываем entryPoint для метрик
+      --metrics.prometheus.entryPoint=metrics
+      --entryPoints.metrics.address=:8082
     ports:
       - target: 80
         published: 80
@@ -32,12 +33,13 @@ services:
         published: 443
         protocol: tcp
         mode: host
-      - target: 8082  # Порт для метрик Prometheus
+      - target: 8082
         published: 8082
         protocol: tcp
         mode: host
     networks:
       - traefik-public
+      - monitoring-internal
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - traefik-public-certs:/certs
